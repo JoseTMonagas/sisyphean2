@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/cable/Cable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/power_generator/PowerGenerator.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+onready var power: Node2D = $PowerGenerator
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_accept\"):
+		_connected_to_power(power.currentNode)
+
+
+func _connected_to_power(current: Node2D, visited: Array = []) -> void:
+	if current == null:
+		return
+	
+	var id = current.get_instance_id()
+	
+	# If the current instance has already been visited skip it, otherwise
+	# add it to the already visited list.
+	if visited.has(id):
+		return
+	else:
+		visited.append(id)
+	
+	# Since we are traversing from the power node, any node that we are able
+	# to visit are connected to power and thus their state must be set to `true`
+	if current.has_method(\"set_power\"):
+		current.set_power(true)
+	
+	if current.has_method(\"is_powered\"):
+		print(\"Node %s: %s\" % [current, current.is_powered()])
+		current.is_powered()
+	
+	# Check if the current node is a cable and which edges are connected to
+	# anything.
+	if \"upNode\" in current:
+		_connected_to_power(current.upNode, visited)
+	if \"downNode\" in current:
+		_connected_to_power(current.downNode, visited)
+	if \"rightNode\" in current:
+		_connected_to_power(current.rightNode, visited)
+	if \"leftNode\" in current:
+		_connected_to_power(current.downNode, visited)
+"
+
+[node name="Test" type="Node"]
+script = SubResource( 1 )
+
+[node name="PowerGenerator" parent="." instance=ExtResource( 2 )]
+
+[node name="Cable" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 0 )
+
+[node name="Cable2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 8 )
+
+[node name="Cable3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 64 )
+
+[node name="Cable4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 64 )
+
+[node name="Cable5" parent="." instance=ExtResource( 1 )]
+position = Vector2( -64, 0 )
+
+[node name="Cable6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 128 )
+
+[node name="Cable7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, -64 )
+
+[node name="Cable8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, -64 )
