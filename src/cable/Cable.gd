@@ -1,5 +1,14 @@
 extends Node2D
 
+enum CABLE_TYPES {
+	CROSS,
+	UP_RIGHT_LEFT,
+	UP_DOWN,
+	UP_RIGHT,
+	RIGHT_LEFT
+}
+
+export (CABLE_TYPES) var TYPE
 export var CONSUMPTION_RATE: int = 1
 export var TTL: float = 60.0 # Time To Live after being disconnected from power
 
@@ -16,6 +25,11 @@ onready var downArea: Area2D = $Down
 onready var rightArea: Area2D = $Right
 onready var leftArea: Area2D = $Left
 onready var tween: Tween = $Tween
+
+func _ready() -> void:
+	assert(TYPE != null)
+	_set_cable()
+
 
 func _process(delta: float) -> void:
 	if _lived > 0:
@@ -40,6 +54,36 @@ func toggle_edge(edge: String, is_active: bool) -> void:
 	var area: Area2D = get(edge)
 	area.monitoring = is_active
 	area.monitorable = is_active
+
+func _set_cable() -> void:
+	var edges: Dictionary = {
+		"upArea": false,
+		"rightArea": false,
+		"downArea": false,
+		"leftArea": false
+	}
+	match TYPE:
+		CABLE_TYPES.CROSS:
+			edges["upArea"] = true
+			edges["rightArea"] = true
+			edges["leftArea"] = true
+			edges["downArea"] = true
+		CABLE_TYPES.UP_RIGHT_LEFT:
+			edges["upArea"] = true
+			edges["rightArea"] = true
+			edges["leftArea"] = true
+		CABLE_TYPES.RIGHT_LEFT:
+			edges["rightArea"] = true
+			edges["leftArea"] = true
+		CABLE_TYPES.UP_DOWN:
+			edges["upArea"] = true
+			edges["downArea"] = true
+		CABLE_TYPES.UP_RIGHT:
+			edges["upArea"] = true
+			edges["rightArea"] = true
+
+	for edge in edges.keys():
+		toggle_edge(edge, edges[edge])
 
 
 func _on_Edge_area_entered(area: Area2D, edge: String) -> void:
