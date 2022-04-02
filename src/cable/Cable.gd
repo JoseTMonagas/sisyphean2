@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 	if _lived <= 0 and not is_powered():
 		set_power(false)
 
+
 func set_power(state: bool) -> bool:
 	if state:
 		_lived = TTL
@@ -35,12 +36,10 @@ func is_powered() -> bool:
 	return _state
 
 
-func _initial_adjacent_nodes(node: String, edge: Area2D) -> void:
-	# When initialy instantiated the instance won't have detected any adjacent
-	# node, thus we need to manually detect and set the initial connections
-	var overlaping_areas = edge.get_overlapping_areas()
-	if len(overlaping_areas) > 0:
-		set(node, overlaping_areas[0].get_parent())
+func _toggle_edge(edge: String, is_active: bool) -> void:
+	var area: Area2D = get(edge)
+	area.monitoring = is_active
+	area.monitorable = is_active
 
 
 func _on_Edge_area_entered(area: Area2D, edge: String) -> void:
