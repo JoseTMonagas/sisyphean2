@@ -1,11 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://src/power_consumer/PowerConsumer.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-
-[sub_resource type="CapsuleShape2D" id=2]
 
 [node name="PowerConsumer" type="Node2D"]
 script = ExtResource( 2 )
@@ -20,8 +18,5 @@ position = Vector2( -32, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Ground" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 0, 32 )
-shape = SubResource( 2 )
+[connection signal="area_entered" from="Current" to="." method="_on_Current_area_entered"]
+[connection signal="area_exited" from="Current" to="." method="_on_Current_area_exited"]

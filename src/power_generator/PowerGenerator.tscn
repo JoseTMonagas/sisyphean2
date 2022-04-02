@@ -18,13 +18,5 @@ rotation = 1.5708
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Current"]
 shape = SubResource( 1 )
 
-[node name="Ground" type="Area2D" parent="."]
-position = Vector2( 0, 32 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-shape = SubResource( 1 )
-
 [connection signal="area_entered" from="Current" to="." method="_on_Current_area_entered"]
 [connection signal="area_exited" from="Current" to="." method="_on_Current_area_exited"]
-[connection signal="area_entered" from="Ground" to="." method="_on_Ground_area_entered"]
-[connection signal="area_exited" from="Ground" to="." method="_on_Ground_area_exited"]
