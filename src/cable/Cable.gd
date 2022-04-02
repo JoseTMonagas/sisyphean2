@@ -36,7 +36,7 @@ func is_powered() -> bool:
 	return _state
 
 
-func _toggle_edge(edge: String, is_active: bool) -> void:
+func toggle_edge(edge: String, is_active: bool) -> void:
 	var area: Area2D = get(edge)
 	area.monitoring = is_active
 	area.monitorable = is_active
