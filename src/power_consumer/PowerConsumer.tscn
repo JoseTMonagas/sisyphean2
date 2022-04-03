@@ -4,6 +4,7 @@
 [ext_resource path="res://src/power_consumer/PowerConsumer.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
 
 [node name="PowerConsumer" type="Node2D"]
 script = ExtResource( 2 )
@@ -12,9 +13,9 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="Current" type="Area2D" parent="."]
+position = Vector2( -16, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Current"]
-position = Vector2( -32, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
