@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="sisyphean2"
+run/main_scene="res://src/ui/MainMenu.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 

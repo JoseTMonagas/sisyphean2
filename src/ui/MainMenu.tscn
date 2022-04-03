@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Start.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/ui/Start.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/ui/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/ui/Song.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://resources/8bitOperatorPlus8-Regular.ttf"
@@ -15,6 +17,7 @@ default_font = SubResource( 2 )
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,3 +71,6 @@ text = "Sisypehan 2: The Legend
  of the Return of 
 Long-Ass Titles"
 align = 1
+
+[node name="Song" parent="." instance=ExtResource( 3 )]
+autoplay = true
