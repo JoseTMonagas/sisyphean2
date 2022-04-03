@@ -51,6 +51,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "stop"
+loop = true
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CPUParticles2D:emitting")
 tracks/0/interp = 1
@@ -62,6 +64,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 28, 29 ]
 }
 
 [node name="PowerGenerator" type="Node2D"]
@@ -86,6 +100,7 @@ anims/stop = SubResource( 4 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 16, 0 )
+emitting = false
 amount = 10
 lifetime = 0.8
 explosiveness = 0.25
