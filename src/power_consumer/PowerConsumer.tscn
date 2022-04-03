@@ -18,5 +18,7 @@ position = Vector2( -32, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
 [connection signal="area_entered" from="Current" to="." method="_on_Current_area_entered"]
 [connection signal="area_exited" from="Current" to="." method="_on_Current_area_exited"]
