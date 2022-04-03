@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex"
+path="res://.import/energy-inactive.png-2546f5d2cfd4d3da7e2a29aba4173161.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/xray-active.png"
-dest_files=[ "res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex" ]
+source_file="res://resources/energy-inactive.png"
+dest_files=[ "res://.import/energy-inactive.png-2546f5d2cfd4d3da7e2a29aba4173161.stex" ]
 
 [params]
 

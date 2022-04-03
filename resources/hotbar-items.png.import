@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex"
+path="res://.import/hotbar-items.png-c254c697a1371f3b6a5fe7ad443e820e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/xray-active.png"
-dest_files=[ "res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex" ]
+source_file="res://resources/hotbar-items.png"
+dest_files=[ "res://.import/hotbar-items.png-c254c697a1371f3b6a5fe7ad443e820e.stex" ]
 
 [params]
 

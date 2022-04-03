@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex"
+path="res://.import/multiplier-active.png-2d5df011cb9b04530345c89e1bb6ec3c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/xray-active.png"
-dest_files=[ "res://.import/xray-active.png-75e9923746dd0499b8eb167c7b1ca8a1.stex" ]
+source_file="res://resources/multiplier-active.png"
+dest_files=[ "res://.import/multiplier-active.png-2d5df011cb9b04530345c89e1bb6ec3c.stex" ]
 
 [params]
 
