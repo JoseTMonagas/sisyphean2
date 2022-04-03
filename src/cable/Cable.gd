@@ -1,4 +1,5 @@
 extends Node2D
+signal rotated
 
 # List of all posible cable types that can be generated
 enum CABLE_TYPES {
@@ -26,10 +27,10 @@ export var TTL: float = .7 # Time To Live after being disconnected from power
 var _state: bool = false setget set_power, is_powered
 var _lived: float = 0.0
 
-var upNode: Node2D = null
-var downNode: Node2D = null
-var rightNode: Node2D = null
-var leftNode: Node2D = null
+var upNode: Node2D = null setget ,get_up_node
+var downNode: Node2D = null setget ,get_down_node
+var rightNode: Node2D = null setget ,get_right_node
+var leftNode: Node2D = null setget ,get_left_node
 
 var edges: Dictionary = {
 	"upArea": false,
@@ -51,13 +52,6 @@ func _ready() -> void:
 	_set_cable()
 
 
-func _process(delta: float) -> void:
-	if _lived > 0:
-		_lived -= 1 * delta
-	if _lived <= 0 and is_powered():
-		set_power(false)
-
-
 func set_power(state: bool) -> bool:
 	if state:
 		_lived = TTL
@@ -73,10 +67,43 @@ func is_powered() -> bool:
 	return _state
 
 
+func get_up_node():
+	if edges["upArea"]:
+		var nodes: Array = upArea.get_overlapping_areas()
+		if len(nodes) > 0:
+			return nodes[0].get_parent()
+	return null
+
+
+func get_right_node():
+	if edges["rightArea"]:
+		var nodes: Array = rightArea.get_overlapping_areas()
+		if len(nodes) > 0:
+			return nodes[0].get_parent()
+	return null
+
+
+func get_down_node():
+	if edges["downArea"]:
+		var nodes: Array = downArea.get_overlapping_areas()
+		if len(nodes) > 0:
+			return nodes[0].get_parent()
+	return null
+
+
+func get_left_node():
+	if edges["leftArea"]:
+		var nodes: Array = leftArea.get_overlapping_areas()
+		if len(nodes) > 0:
+			return nodes[0].get_parent()
+	return null
+
+
 func toggle_edge(edge: String, is_active: bool) -> void:
 	var area: Area2D = get(edge)
 	if not is_active:
 		area.queue_free()
+
 
 func _set_cable() -> void:
 	match TYPE:
@@ -139,3 +166,7 @@ func _on_ClickArea_input_event(
 		rightNode = null
 		downNode = null
 		leftNode = null
+
+
+func _on_Tween_tween_all_completed():
+	emit_signal("rotated")
