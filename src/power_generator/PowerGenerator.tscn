@@ -4,6 +4,7 @@
 [ext_resource path="res://src/power_generator/PowerGenerator.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -77,6 +78,7 @@ position = Vector2( 32, 0 )
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Current"]
+position = Vector2( 9.53674e-07, 9.53674e-07 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -101,4 +103,3 @@ linear_accel = -4.56
 linear_accel_random = 1.0
 
 [connection signal="area_entered" from="Current" to="." method="_on_Current_area_entered"]
-[connection signal="area_exited" from="Current" to="." method="_on_Current_area_exited"]

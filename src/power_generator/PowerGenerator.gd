@@ -6,9 +6,5 @@ onready var currentArea: Area2D = $Current
 
 
 func _on_Current_area_entered(area: Area2D) -> void:
+	print(area.get_parent())
 	currentNode = area.get_parent()
-
-
-func _on_Current_area_exited(area: Area2D) -> void:
-	if area.get_parent() == currentNode:
-		currentNode = null
