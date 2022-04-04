@@ -280,30 +280,44 @@ TYPE = 1
 [node name="Bedroom" parent="." groups=["consumer"] instance=ExtResource( 4 )]
 position = Vector2( 248, 56 )
 CONSUMPTION_RATE = 5
+ACTIVE_ANIMATION = "HappyActive"
+INACTIVE_ANIMATION = "SadInactive"
 
 [node name="Bedroom2" parent="." groups=["consumer"] instance=ExtResource( 4 )]
-position = Vector2( 120, 216 )
-CONSUMPTION_RATE = 3
+position = Vector2( 152, 56 )
+CONSUMPTION_RATE = 5
+ACTIVE_ANIMATION = "HappyActive"
+INACTIVE_ANIMATION = "SadInactive"
 
 [node name="Bedroom3" parent="." groups=["consumer"] instance=ExtResource( 4 )]
-position = Vector2( 216, 120 )
-CONSUMPTION_RATE = 7
+position = Vector2( 120, 120 )
+CONSUMPTION_RATE = 5
+ACTIVE_ANIMATION = "HappyActive"
+INACTIVE_ANIMATION = "SadInactive"
 
 [node name="Bedroom4" parent="." groups=["consumer"] instance=ExtResource( 4 )]
-position = Vector2( 120, 120 )
-CONSUMPTION_RATE = 2
+position = Vector2( 184, 152 )
+CONSUMPTION_RATE = 5
+ACTIVE_ANIMATION = "HappyActive"
+INACTIVE_ANIMATION = "SadInactive"
 
 [node name="Bedroom5" parent="." groups=["consumer"] instance=ExtResource( 4 )]
 position = Vector2( 184, 216 )
-CONSUMPTION_RATE = 2
+CONSUMPTION_RATE = 5
+ACTIVE_ANIMATION = "HappyActive"
+INACTIVE_ANIMATION = "SadInactive"
 
 [node name="BloodBank" parent="." instance=ExtResource( 5 )]
 position = Vector2( 344, 88 )
 CONSUMPTION_RATE = 4
+ACTIVE_ANIMATION = "Active"
+INACTIVE_ANIMATION = "Inactive"
 
 [node name="XRay" parent="." instance=ExtResource( 3 )]
 position = Vector2( 280, 184 )
 CONSUMPTION_RATE = 10
+ACTIVE_ANIMATION = "Active"
+INACTIVE_ANIMATION = "Inactive"
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.719
