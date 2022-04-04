@@ -109,7 +109,7 @@ script = SubResource( 1 )
 POWER_RATIO = 15.0
 
 [node name="PowerGenerator" parent="." groups=["generator"] instance=ExtResource( 2 )]
-position = Vector2( 32, 24 )
+position = Vector2( 40, 24 )
 
 [node name="Cable" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 24 )
