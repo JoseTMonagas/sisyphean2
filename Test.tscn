@@ -17,7 +17,10 @@ var consumption_rate: float = 0.0 setget set_consumption_rate
 onready var power: Node2D = $PowerGenerator
 onready var cables: Array = get_tree().get_nodes_in_group(\"cables\")
 
-onready var power_bar: ProgressBar = $Control/ProgressBar
+onready var generated_label: Label = $Control/VBoxContainer/Generated/Value
+onready var consumed_label: Label = $Control/VBoxContainer/Consumed/Value
+onready var ratio_label: Label = $Control/VBoxContainer/Ratio/Value
+
 
 func _ready() -> void:
 	assert(POWER_RATIO > 0)
@@ -28,18 +31,21 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	if Input.is_action_just_pressed(\"ui_accept\"):
-		var power: int = clamp(current_power - consumption_rate + POWER_RATIO * delta, 0, 20)
-		set_current_power(power)
+		var power: float = current_power + (POWER_RATIO * delta)
+		generated_label.text = \"%2.1f\" % power
+		var consumption: float = consumption_rate * delta
+		set_current_power(clamp(power - consumption, 0, 100))
 
 		
 func set_current_power(value: float) -> float:
 	current_power = value
-	power_bar.value = current_power
+	ratio_label.text = \"%2.1f\" % value
 	return current_power
-
+	
 
 func set_consumption_rate(value: float) -> float:
 	consumption_rate = value
+	consumed_label.text = \"%2.1f\" % value
 	return consumption_rate
 
 
@@ -98,7 +104,7 @@ func _traverse_nodes(current: Node2D, visited: Array = []) -> Array:
 
 [node name="Test" type="Node"]
 script = SubResource( 1 )
-POWER_RATIO = 5.0
+POWER_RATIO = 15.0
 
 [node name="PowerGenerator" parent="." groups=["generator"] instance=ExtResource( 2 )]
 position = Vector2( 32, 24 )
@@ -300,21 +306,70 @@ position = Vector2( 280, 184 )
 CONSUMPTION_RATE = 10
 
 [node name="Control" type="Control" parent="."]
-anchor_top = 0.813
+anchor_left = 0.719
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 0.0999908
+margin_left = -8.12802
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ProgressBar" type="ProgressBar" parent="Control"]
-anchor_top = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -14.0
-max_value = 20.0
-percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Generated" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_right = 152.0
+margin_bottom = 14.0
+
+[node name="Title" type="Label" parent="Control/VBoxContainer/Generated"]
+margin_right = 114.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Power Generated:"
+align = 2
+
+[node name="Value" type="Label" parent="Control/VBoxContainer/Generated"]
+margin_left = 118.0
+margin_right = 152.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Consumed" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 18.0
+margin_right = 152.0
+margin_bottom = 32.0
+
+[node name="Title" type="Label" parent="Control/VBoxContainer/Consumed"]
+margin_right = 115.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Power Consumed:"
+align = 2
+
+[node name="Value" type="Label" parent="Control/VBoxContainer/Consumed"]
+margin_left = 119.0
+margin_right = 152.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Ratio" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 36.0
+margin_right = 152.0
+margin_bottom = 50.0
+
+[node name="Title" type="Label" parent="Control/VBoxContainer/Ratio"]
+margin_right = 74.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "L + Ratio:"
+align = 2
+
+[node name="Value" type="Label" parent="Control/VBoxContainer/Ratio"]
+margin_left = 78.0
+margin_right = 152.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
