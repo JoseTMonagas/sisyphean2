@@ -113,7 +113,7 @@ position = Vector2( 40, 24 )
 
 [node name="Cable" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 24 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable2" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 56 )
@@ -125,7 +125,7 @@ TYPE = 1
 
 [node name="Cable4" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 120, 56 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable5" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 312, 56 )
@@ -153,7 +153,7 @@ TYPE = 1
 
 [node name="Cable12" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable13" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 152 )
@@ -177,7 +177,7 @@ TYPE = 1
 
 [node name="Cable18" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 184 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable19" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 216 )
@@ -185,11 +185,11 @@ TYPE = 1
 
 [node name="Cable20" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 24 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable22" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 152 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable23" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 216 )
@@ -197,11 +197,11 @@ TYPE = 1
 
 [node name="Cable24" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 88 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable25" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 24 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable26" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 56 )
@@ -209,7 +209,7 @@ TYPE = 1
 
 [node name="Cable27" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 24 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable28" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 56 )
@@ -217,7 +217,7 @@ TYPE = 1
 
 [node name="Cable29" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 312, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable31" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 88 )
@@ -229,11 +229,11 @@ TYPE = 1
 
 [node name="Cable33" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 88 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable35" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 88 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable36" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 120 )
@@ -253,23 +253,22 @@ TYPE = 1
 
 [node name="Cable40" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 184 )
-TYPE = 1
 
 [node name="Cable41" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 152 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable42" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 184 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable44" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable45" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 216 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable46" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 216 )
