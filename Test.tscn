@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/cable/Cable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/power_generator/PowerGenerator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/power_consumer/XRay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/power_consumer/Bedroom.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/power_consumer/BloodBank.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/font.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -38,6 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	if Input.is_action_just_pressed(\"ui_accept\"):
+		$PowerGenerator.set_anim('run')
 		var power: float = current_power + (POWER_RATIO * delta)
 		generated_label.text = \"%2.1f\" % power
 		var consumption: float = consumption_rate * delta
@@ -132,10 +134,11 @@ script = SubResource( 1 )
 POWER_RATIO = 15.0
 
 [node name="PowerGenerator" parent="." groups=["generator"] instance=ExtResource( 2 )]
-position = Vector2( 32, 24 )
+position = Vector2( 40, 24 )
 
 [node name="Cable" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 24 )
+TYPE = 3
 
 [node name="Cable2" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 56 )
@@ -147,7 +150,7 @@ TYPE = 1
 
 [node name="Cable4" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 120, 56 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable5" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 312, 56 )
@@ -198,6 +201,11 @@ TYPE = 2
 
 [node name="Cable18" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 184 )
+TYPE = 2
+
+[node name="Cable19" parent="." groups=["cables"] instance=ExtResource( 1 )]
+position = Vector2( 88, 216 )
+TYPE = 1
 
 [node name="Cable20" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 24 )
@@ -205,7 +213,7 @@ TYPE = 2
 
 [node name="Cable22" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 152 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable23" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 216 )
@@ -213,11 +221,11 @@ TYPE = 2
 
 [node name="Cable24" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 88 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable25" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 24 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable26" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 56 )
@@ -225,7 +233,7 @@ TYPE = 1
 
 [node name="Cable27" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 24 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable28" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 56 )
@@ -244,11 +252,11 @@ TYPE = 2
 
 [node name="Cable33" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 88 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable35" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 88 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable36" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 120 )
@@ -268,23 +276,22 @@ TYPE = 1
 
 [node name="Cable40" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 184 )
-TYPE = 1
 
 [node name="Cable41" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 152 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable42" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 184 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable44" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable45" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 216 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable47" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 216 )
@@ -336,7 +343,8 @@ INACTIVE_ANIMATION = "Inactive"
 anchor_left = 0.719
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -8.12802
+margin_left = -54.128
+margin_top = 189.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -344,59 +352,68 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -19.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Generated" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_right = 152.0
-margin_bottom = 14.0
+margin_top = 33.0
+margin_right = 217.0
+margin_bottom = 45.0
 
 [node name="Title" type="Label" parent="Control/VBoxContainer/Generated"]
-margin_right = 114.0
-margin_bottom = 14.0
+margin_right = 151.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
 text = "Power Generated:"
 align = 2
 
 [node name="Value" type="Label" parent="Control/VBoxContainer/Generated"]
-margin_left = 118.0
-margin_right = 152.0
-margin_bottom = 14.0
+margin_left = 155.0
+margin_right = 217.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
 
 [node name="Consumed" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 18.0
-margin_right = 152.0
-margin_bottom = 32.0
+margin_top = 49.0
+margin_right = 217.0
+margin_bottom = 61.0
 
 [node name="Title" type="Label" parent="Control/VBoxContainer/Consumed"]
-margin_right = 115.0
-margin_bottom = 14.0
+margin_right = 145.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
 text = "Power Consumed:"
 align = 2
 
 [node name="Value" type="Label" parent="Control/VBoxContainer/Consumed"]
-margin_left = 119.0
-margin_right = 152.0
-margin_bottom = 14.0
+margin_left = 149.0
+margin_right = 217.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
 
 [node name="Ratio" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 36.0
-margin_right = 152.0
-margin_bottom = 50.0
+margin_top = 65.0
+margin_right = 217.0
+margin_bottom = 77.0
 
 [node name="Title" type="Label" parent="Control/VBoxContainer/Ratio"]
-margin_right = 74.0
-margin_bottom = 14.0
+margin_right = 106.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
 text = "L + Ratio:"
 align = 2
 
 [node name="Value" type="Label" parent="Control/VBoxContainer/Ratio"]
-margin_left = 78.0
-margin_right = 152.0
-margin_bottom = 14.0
+margin_left = 110.0
+margin_right = 217.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+theme = ExtResource( 6 )
