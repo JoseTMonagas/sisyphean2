@@ -14,8 +14,15 @@ export var POWER_RATIO: float
 var current_power: float = 0.0 setget set_current_power
 var consumption_rate: float = 0.0 setget set_consumption_rate
 
+var is_connected_to_xray: bool = false
+var is_connected_to_blood: bool = false
+
 onready var power: Node2D = $PowerGenerator
 onready var cables: Array = get_tree().get_nodes_in_group(\"cables\")
+onready var xray_room: Node2D = $XRay
+onready var blood_room: Node2D = $BloodBank
+onready var xray_room_id: int = xray_room.get_instance_id()
+onready var blood_room_id: int = blood_room.get_instance_id()
 
 onready var generated_label: Label = $Control/VBoxContainer/Generated/Value
 onready var consumed_label: Label = $Control/VBoxContainer/Consumed/Value
@@ -39,6 +46,10 @@ func _physics_process(delta) -> void:
 		
 func set_current_power(value: float) -> float:
 	current_power = value
+	if is_connected_to_xray:
+		current_power += 1
+	if is_connected_to_blood:
+		current_power *= 2
 	ratio_label.text = \"%2.1f\" % value
 	return current_power
 	
@@ -54,6 +65,20 @@ func _on_Cable_rotated() -> void:
 	for cable in cables:
 		var id: int = cable.get_instance_id()
 		cable.set_power(connected.has(id))
+		
+	if connected.has(xray_room_id):
+		is_connected_to_xray = true
+		xray_room.animationPlayer.play(xray_room.ACTIVE_ANIMATION)
+	else:
+		is_connected_to_xray = false
+		xray_room.animationPlayer.play(xray_room.INACTIVE_ANIMATION)
+		
+	if connected.has(blood_room_id):
+		is_connected_to_blood = true
+		blood_room.animationPlayer.play(blood_room.ACTIVE_ANIMATION)
+	else:
+		is_connected_to_blood = false
+		blood_room.animationPlayer.play(blood_room.INACTIVE_ANIMATION)
 	set_consumption_rate(1 * len(connected))
 	
 	
@@ -111,7 +136,6 @@ position = Vector2( 32, 24 )
 
 [node name="Cable" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 24 )
-TYPE = 1
 
 [node name="Cable2" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 56 )
@@ -127,7 +151,7 @@ TYPE = 1
 
 [node name="Cable5" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 312, 56 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable6" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 56 )
@@ -135,7 +159,7 @@ TYPE = 1
 
 [node name="Cable7" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 88 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable8" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 120 )
@@ -143,23 +167,22 @@ TYPE = 1
 
 [node name="Cable9" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 120, 88 )
-TYPE = 1
 
 [node name="Cable11" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 88 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable12" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable13" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 152 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable14" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 88, 184 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable15" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 120, 152 )
@@ -167,23 +190,18 @@ TYPE = 1
 
 [node name="Cable16" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 120, 184 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable17" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 152 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable18" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 184 )
-TYPE = 1
-
-[node name="Cable19" parent="." groups=["cables"] instance=ExtResource( 1 )]
-position = Vector2( 88, 216 )
-TYPE = 1
 
 [node name="Cable20" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 24 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable22" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 152 )
@@ -191,7 +209,7 @@ TYPE = 1
 
 [node name="Cable23" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 152, 216 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable24" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 280, 88 )
@@ -215,15 +233,14 @@ TYPE = 1
 
 [node name="Cable29" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 312, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable31" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 88 )
-TYPE = 1
 
 [node name="Cable32" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 120 )
-TYPE = 1
+TYPE = 2
 
 [node name="Cable33" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 88 )
@@ -243,7 +260,7 @@ TYPE = 1
 
 [node name="Cable38" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 184, 184 )
-TYPE = 1
+TYPE = 3
 
 [node name="Cable39" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 216, 152 )
@@ -269,13 +286,9 @@ TYPE = 1
 position = Vector2( 216, 216 )
 TYPE = 1
 
-[node name="Cable46" parent="." groups=["cables"] instance=ExtResource( 1 )]
-position = Vector2( 280, 216 )
-TYPE = 1
-
 [node name="Cable47" parent="." groups=["cables"] instance=ExtResource( 1 )]
 position = Vector2( 248, 216 )
-TYPE = 1
+TYPE = 2
 
 [node name="Bedroom" parent="." groups=["consumer"] instance=ExtResource( 4 )]
 position = Vector2( 248, 56 )
